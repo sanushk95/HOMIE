@@ -1,2 +1,2 @@
 # HOMIE
-A home monitoring system powered by Raspberry Pi, Arduino, Node.js and D3.
+A home monitoring system powered by Arduino, Node.js,socket.io and D3.
