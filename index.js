@@ -9,6 +9,34 @@ http.listen(3000,function(){
 })
 let five = require('johnny-five');
 let arduino =new five.Board();
+
+arduino.on("ready", function() {
+  var multi = new five.Multi({
+    controller: "HTU21D",
+    freq: 1000
+  });
+
+  multi.on("change", function() {
+    console.log("Thermometer");
+    console.log("  celsius           : ", this.thermometer.celsius);
+    console.log("  fahrenheit        : ", this.thermometer.fahrenheit);
+    console.log("  kelvin            : ", this.thermometer.kelvin);
+    console.log("--------------------------------------");
+    
+    console.log("Hygrometer");
+    console.log("  relative humidity : ", this.hygrometer.relativeHumidity);
+    io.sockets.emit("--------------------------------------");
+    io.sockets.emit("Thermometer");
+    io.sockets.emit("  celsius           : ", this.thermometer.celsius);
+    io.sockets.emit("  fahrenheit        : ", this.thermometer.fahrenheit);
+    io.sockets.emit("  kelvin            : ", this.thermometer.kelvin);
+    io.sockets.emit("--------------------------------------");
+    
+    io.sockets.emit("Hygrometer");
+    io.sockets.emit("  relative humidity : ", this.hygrometer.relativeHumidity);
+    io.sockets.emit("--------------------------------------");
+  });
+});
 arduino.on("ready", function() {
     // Create a new `motion` hardware instance.
     var motion = new five.Motion(2);
