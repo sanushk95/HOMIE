@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HOMIE</title>
+
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,600,700&display=swap" rel="stylesheet">
+    <link href="css/main.css" rel="stylesheet" type="text/css" media="screen">
+</head>
+<body>
+    <div id="container">
+        <div class="app">
+            <div id="login_page">
+                <div class="login_logo">
+                    <img src="images/logo.png" alt="logo">
+                </div>
+                <div class="login_form">
+                    <form method="post" action="">
+                        <h2>Login HO-ME:</h2>
+                        <br>
+                        Username: <input type="text" name="username">
+                        <br>
+                        Password: <input type="password" name="pass">
+                        <br>
+                        <input type="submit" name="login" class="button3" value="Login">
+                    </form>
+                    <button class="button3" id="doRegister">Register</button>
+                </div>
+
+                <div class="register_form">
+                    <form method="post" action="/">
+                        <h2>Register Ho-Me:</h2>
+                        <br>
+                        Name: <input type="text" name="username">
+                        <br>
+                        Username: <input type="text" name="username">
+                        <br>
+                        Create Password: <input type="password" name="pass">
+                        <br>
+                        <input type="submit" name="register" class="button3" value="Register">
+                    </form>
+                    <button class="button3" id="doLogin">Login</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let reg_btn = document.querySelector("#doRegister");
+        let login_btn = document.querySelector("#doLogin");
+
+        reg_btn.addEventListener("click", function(event) {
+            document.getElementsByClassName("login_form")[0].style.display = "none";
+            document.getElementsByClassName("register_form")[0].style.display = "block";
+        });
+
+        login_btn.addEventListener("click", function(event) {
+            document.getElementsByClassName("register_form")[0].style.display = "none";
+            document.getElementsByClassName("login_form")[0].style.display = "block";
+        });
+    </script>
+</body>
+</html>
