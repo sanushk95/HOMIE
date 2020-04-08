@@ -1,4 +1,3 @@
-
 (function () {
 
 	let socket=io.connect("http://localhost:3000");
@@ -15,7 +14,7 @@
 		}
 		else
 		{
-			motionElement.innerHTML = `<h3>Inactive</h3>`
+			motionElement.innerHTML = `<h3>Inactive</h3>`;
 		}
 	});
 	socket.on("temp", (data) => {
