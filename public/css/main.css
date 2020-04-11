@@ -111,21 +111,42 @@ body {
           #container .app #main_container .welcome .weather_block .myButton:active {
             position: relative;
             top: 1px; }
-      #container .app #main_container #sensors {
+      #container .app #main_container .dashboard {
         display: flex;
         flex-direction: row;
         justify-content: space-between;
-        width: 50%;
-        flex-wrap: wrap-reverse; }
-        #container .app #main_container #sensors .sensor {
+        flex-wrap: wrap; }
+        #container .app #main_container .dashboard #sensors {
+          display: flex;
+          flex-direction: row;
+          justify-content: space-between;
+          width: 50%;
+          flex-wrap: wrap-reverse; }
+          #container .app #main_container .dashboard #sensors .sensor {
+            width: 40%;
+            min-width: 180px;
+            border: 1px solid black;
+            border-radius: 10px;
+            padding: 10px;
+            height: 150px;
+            margin: 10px 10px;
+            box-sizing: border-box; }
+        #container .app #main_container .dashboard .news {
           width: 40%;
-          min-width: 180px;
-          border: 1px solid black;
-          border-radius: 10px;
-          padding: 10px;
-          height: 150px;
-          margin: 10px 10px;
-          box-sizing: border-box; }
+          max-height: 350px;
+          overflow: scroll; }
+          #container .app #main_container .dashboard .news .articles .article {
+            margin-bottom: 40px; }
+            #container .app #main_container .dashboard .news .articles .article a {
+              text-decoration: none;
+              color: #55a000; }
+            #container .app #main_container .dashboard .news .articles .article a:hover {
+              border-bottom: 1px solid #55a000; }
+            #container .app #main_container .dashboard .news .articles .article img {
+              display: block;
+              width: 80%;
+              margin: 0 auto;
+              padding-bottom: 10px; }
       #container .app #main_container .graph {
         width: 100%;
         height: 130px;

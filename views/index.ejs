@@ -3,7 +3,7 @@
     <div id="main_container">
         <%- include ('partials/userWelcome.ejs') %>
 
-
+        <div class="dashboard">
             <div id="sensors">
                 <div  class="sensor temperature">Motion
                     <div id="motionElement"></div>
@@ -18,9 +18,22 @@
                     <div id="humidityElement"></div>
                 </div>
             </div>
-        
-            <div class="graph">
-                Paste the graph here....
+
+            <div class="news">
+                <h2>Headlines</h2>
+                <div class="articles">
+                    <% for(let i = 0; i < articles.length; i++) { %>
+                        <div class="article">
+                            <img src="<%= articles[i].urlToImage %>" alt="article-image<%= i %>">
+                            <h3><a target="_blank" href="<%= articles[i].url %>"><%= articles[i].title %></a></h3>
+                        </div>
+                    <% } %>
+                </div>
             </div>
+        </div>
+
+        <div class="graph">
+            Paste the graph here....
+        </div>
     </div>
 <%- include ('partials/tail.ejs') %> 
