@@ -2,6 +2,9 @@
   padding: 0;
   margin: 0; }
 
+li {
+  list-style: none; }
+
 body {
   background-color: #464242;
   font-family: 'Roboto', Arial, Helvetica, sans-serif; }
@@ -20,7 +23,7 @@ body {
     flex-direction: row;
     border-radius: 25px; }
     #container .app .navbar {
-      width: 10%;
+      width: 130px;
       background-color: #73D601;
       border-top-left-radius: 25px;
       border-bottom-left-radius: 25px;
@@ -29,23 +32,23 @@ body {
         width: 55%;
         height: 100%;
         margin: 0 auto;
+        text-align: center;
         display: flex;
         flex-direction: column;
         justify-content: space-around; }
       #container .app .navbar img {
-        width: 30%;
-        min-width: 40px;
-        padding-left: 4px; }
+        width: 90%;
+        min-width: 49px; }
       #container .app .navbar ul {
         display: flex;
         flex-direction: column;
         margin: 0 auto; }
         #container .app .navbar ul img {
-          padding-bottom: 10px; }
+          padding-bottom: 15px; }
     #container .app #main_container {
       display: flex;
       flex-direction: column;
-      justify-content: space-between;
+      justify-content: flex-start;
       padding: 20px;
       width: 85%;
       border-top-right-radius: 25px;
@@ -53,19 +56,70 @@ body {
       #container .app #main_container .welcome {
         background-color: #beb9b9;
         width: 100%;
-        height: 80px;
-        padding: 10px;
+        height: 120px;
+        padding: 25px;
         box-sizing: border-box;
-        border-radius: 10px; }
+        border-radius: 10px;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        margin-bottom: 15px; }
         #container .app #main_container .welcome h2 {
           margin-bottom: 7px; }
+        #container .app #main_container .welcome .weather_block {
+          display: flex; }
+          #container .app #main_container .welcome .weather_block .user_msg {
+            display: flex;
+            flex-direction: column;
+            justify-content: center; }
+          #container .app #main_container .welcome .weather_block .weather_block {
+            display: flex;
+            flex-direction: row; }
+          #container .app #main_container .welcome .weather_block .find {
+            align-self: center;
+            margin-right: 12px; }
+          #container .app #main_container .welcome .weather_block #show {
+            align-self: center;
+            margin-top: -5px;
+            text-align: center; }
+            #container .app #main_container .welcome .weather_block #show img {
+              margin-bottom: -15px; }
+          #container .app #main_container .welcome .weather_block input[type=text], #container .app #main_container .welcome .weather_block button {
+            height: 30px; }
+          #container .app #main_container .welcome .weather_block input[type=text] {
+            border-radius: 6px;
+            padding-left: 10px;
+            outline: none;
+            border: none; }
+          #container .app #main_container .welcome .weather_block .myButton {
+            box-shadow: inset 0px 1px 0px 0px #d9fbbe;
+            background-color: #73D601;
+            border-radius: 6px;
+            border: 1px solid #83c41a;
+            display: inline-block;
+            cursor: pointer;
+            color: #ffffff;
+            font-family: Arial;
+            font-size: 15px;
+            font-weight: bold;
+            padding: 6px 24px;
+            text-decoration: none;
+            text-shadow: 0px 1px 0px #86ae47; }
+          #container .app #main_container .welcome .weather_block .myButton:hover {
+            background: linear-gradient(to bottom, #a5cc52 5%, #b8e356 100%);
+            background-color: #a5cc52; }
+          #container .app #main_container .welcome .weather_block .myButton:active {
+            position: relative;
+            top: 1px; }
       #container .app #main_container #sensors {
         display: flex;
         flex-direction: row;
         justify-content: space-between;
-        width: 100%; }
+        width: 50%;
+        flex-wrap: wrap-reverse; }
         #container .app #main_container #sensors .sensor {
-          width: 30%;
+          width: 40%;
+          min-width: 180px;
           border: 1px solid black;
           border-radius: 10px;
           padding: 10px;

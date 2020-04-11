@@ -1,0 +1,26 @@
+<%- include ('partials/head.ejs') %>
+<%- include ('partials/menu.ejs') %> 
+    <div id="main_container">
+        <%- include ('partials/userWelcome.ejs') %>
+
+
+            <div id="sensors">
+                <div  class="sensor temperature">Motion
+                    <div id="motionElement"></div>
+                </div>
+                <div  class="sensor humidity">Temperature
+                    <div id="thermElement"></div>
+                </div>
+                <div class="sensor light">Light
+                    <div id="lightElement" ></div>
+                </div>
+                <div  class="sensor room">Humidity
+                    <div id="humidityElement"></div>
+                </div>
+            </div>
+        
+            <div class="graph">
+                Paste the graph here....
+            </div>
+    </div>
+<%- include ('partials/tail.ejs') %> 
