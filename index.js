@@ -7,6 +7,8 @@ let path = require('path');
 let cookieParser = require('cookie-parser');
 let logger = require('morgan');
 
+//Importing routes for news.
+let newsRoutes = require("./routes/get_news");
 let indexRoutes = require("./routes/index");
 
 // view engine setup
@@ -27,6 +29,7 @@ app.use(function(req, res, next) {
 
 //Configuring routes to the server.
 app.use('/', indexRoutes);
+app.use('/news', newsRoutes);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
