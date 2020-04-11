@@ -3,7 +3,15 @@ let router = express.Router();
 let axios = require('axios');
 
 router.get("/", (req, res, next) => {
-    res.render("index");
+    let newsArticles;
+    
+    axios.get('http://127.0.0.1:3000/news')
+        .then((response) => {
+            res.render("index", {articles: response.data.articles});
+        })
+        .catch(err => {
+            
+        });
 });
 
 router.get("/settings", (req, res, next) => {
