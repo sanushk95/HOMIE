@@ -10,8 +10,15 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "axios": "^0.19.2",
+    "cookie-parser": "^1.4.5",
+    "debug": "^4.1.1",
+    "ejs": "^3.0.2",
     "express": "^4.17.1",
+    "http-errors": "^1.7.3",
     "johnny-five": "^1.4.0",
+    "morgan": "^1.10.0",
+    "nodemon": "^2.0.3",
     "socket.io": "^2.3.0"
   }
 }

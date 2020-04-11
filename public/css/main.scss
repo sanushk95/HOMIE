@@ -3,6 +3,10 @@
     margin: 0;
 }
 
+li {
+    list-style: none;
+}
+
 body {
     background-color: rgb(70, 66, 66);
     font-family: 'Roboto', Arial, Helvetica, sans-serif;
@@ -24,7 +28,7 @@ body {
         border-radius: 25px;
 
         .navbar {
-            width: 10%;
+            width: 130px;
             background-color: #73D601;
             border-top-left-radius: 25px;
             border-bottom-left-radius: 25px;
@@ -34,6 +38,7 @@ body {
                 width: 55%;
                 height: 100%;
                 margin: 0 auto;
+                text-align: center;
 
                 display: flex;
                 flex-direction: column;
@@ -41,9 +46,8 @@ body {
             }
 
             img {
-                width: 30%;
-                min-width: 40px;
-                padding-left: 4px;
+                width: 90%;
+                min-width: 49px;
             }
 
             ul {
@@ -52,7 +56,7 @@ body {
                 margin: 0 auto;
 
                 img {
-                    padding-bottom: 10px;
+                    padding-bottom: 15px;
                 }
             }
         }
@@ -60,7 +64,7 @@ body {
         #main_container {
             display: flex;
             flex-direction: column;
-            justify-content: space-between;
+            justify-content: flex-start;
             padding: 20px;
             width: 85%;
 
@@ -70,32 +74,106 @@ body {
             .welcome {
                background-color: rgb(190, 185, 185);
                width: 100%;
-               height: 80px;
-               padding: 10px;
+               height: 120px;
+               padding: 25px;
                box-sizing: border-box;
                border-radius: 10px;
+               display: flex;
+               flex-direction: row;
+               justify-content: space-between;
+               margin-bottom: 15px;
 
                h2 {
                    margin-bottom: 7px;
                }
+
+               .weather_block {
+                    display: flex;
+                    
+
+                    .user_msg {
+                        display: flex;
+                        flex-direction: column;
+                        justify-content: center;
+                    }
+
+                    .weather_block {
+                        display: flex;
+                        flex-direction: row;
+                    }
+
+                    .find {
+                        align-self: center;
+                        margin-right: 12px;
+                    }
+
+                    #show {
+                        align-self: center;
+                        margin-top: -5px;
+                        text-align: center;
+
+                        img {
+                            margin-bottom: -15px;
+                        }
             }
 
-            #sensors {
-                display: flex;
-                flex-direction: row;
-                justify-content: space-between;
-                width: 100%;
+                   input[type=text], button {
+                       height: 30px;
+                   }
 
-                .sensor {
-                    width: 30%;
-                    border: 1px solid black;
-                    border-radius: 10px;
-                    padding: 10px;
-                    height: 150px;
-                    margin: 10px 10px;
-                    box-sizing: border-box;
+                   input[type=text] {
+                       border-radius: 6px;
+                       padding-left: 10px;
+                       outline: none;
+                       border: none;
+                   }
+
+                    .myButton {
+                        box-shadow:inset 0px 1px 0px 0px #d9fbbe;
+                        background-color:#73D601;
+                        border-radius:6px;
+                        border:1px solid #83c41a;
+                        display:inline-block;
+                        cursor:pointer;
+                        color:#ffffff;
+                        font-family:Arial;
+                        font-size:15px;
+                        font-weight:bold;
+                        padding:6px 24px;
+                        text-decoration:none;
+                        text-shadow:0px 1px 0px #86ae47;
+                    }
+                    .myButton:hover {
+                        background:linear-gradient(to bottom, #a5cc52 5%, #b8e356 100%);
+                        background-color:#a5cc52;
+                    }
+                    .myButton:active {
+                        position:relative;
+                        top:1px;
+                    }                
+               }
+            }
+        
+            
+
+                #sensors {
+                    display: flex;
+                    flex-direction: row;
+                    justify-content: space-between;
+                    width: 50%;
+                    flex-wrap: wrap-reverse;
+
+                    .sensor {
+                        width: 40%;
+                        min-width: 180px;
+                        border: 1px solid black;
+                        border-radius: 10px;
+                        padding: 10px;
+                        height: 150px;
+                        margin: 10px 10px;
+                        box-sizing: border-box;
+                    }
                 }
-            }
 
             .graph {
                 width: 100%;
