@@ -9866,24 +9866,6 @@ body .jqstooltip {
   border-color: transparent;
   border-radius: 60px; }
 
-/*******************
-Notification page Jquery toaster
-******************/
-.jq-icon-info {
-  background-color: #398bf7;
-  color: #ffffff; }
-
-.jq-icon-success {
-  background-color: #06d79c;
-  color: #ffffff; }
-
-.jq-icon-error {
-  background-color: #ef5350;
-  color: #ffffff; }
-
-.jq-icon-warning {
-  background-color: #ffb22b;
-  color: #ffffff; }
 
 
 /*******************
