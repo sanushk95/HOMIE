@@ -8,6 +8,29 @@
     display: block;
 }
 
+.news-img-circle {
+    border-radius: 50%;
+}
+
+.image-cropper {
+    width: 40px;
+    height: 40px;
+    overflow: hidden;
+    border-radius: 50%;
+}
+
+.image-cropper img {
+    display: inline;
+    height: 100%;
+}
+
+#news-item-image{
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-size: contain;
+}
+
 @media (min-width: 768px) {
     .responsive-topbar  {
         display: none;

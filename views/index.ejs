@@ -19,7 +19,7 @@
 
 <body class="fix-header fix-sidebar card-no-border">
     <div id="main-wrapper">
-       
+
         <header class="topbar responsive-topbar">
             <nav class="navbar top-navbar navbar-expand-md navbar-light">
                 <div class="navbar-header">
@@ -151,6 +151,28 @@
 
                     </div>
                 </div>
+
+
+
+                <div class="row">
+                    <div class="col-lg- col-md-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="d-flex">
+                                    <h4 class="card-title"><span class="lstick"></span>Headline News</h4>
+                                </div>
+                                <div class="message-box contact-box">
+                                    <div id="news-container" class="message-widget contact-widget">
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
                 <div class="row">
                     <div class="col-lg-12 col-md-12">
                         <div class="card">
@@ -341,9 +363,20 @@
             <footer class="footer"></footer>
         </div>
     </div>
+    <template id="news-template">
+        <a href="#">
+            <div class="user-img " id="news-item-image">
+                <span class="profile-status busy pull-right"></span>
+            </div>
+            <div id="news-container" class="mail-contnet">
+                <h5 class="news-item-title">Title</h5> <span class="mail-desc news-item-description">Description</span>
+            </div>
+        </a>
+    </template>
     <script src="js/script.js"></script>
     <script src="js/navigation.js"></script>
     <script src="js/charts.js"></script>
+    <script src="js/news.js"></script>
 </body>
 
 </html>
