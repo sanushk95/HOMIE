@@ -8,9 +8,6 @@
     display: block;
 }
 
-.news-img-circle {
-    border-radius: 50%;
-}
 
 .image-cropper {
     width: 40px;
@@ -24,17 +21,28 @@
     height: 100%;
 }
 
-#news-item-image{
-    width: 50px;
-    height: 50px;
+.news-item-image {
+    width: 50px !important;
+    height: 50px !important;
     border-radius: 50%;
     background-size: contain;
+    margin: auto !important;
+    vertical-align: middle;
+}
+
+#weather-icon {
+    background-size: contain;
+    -webkit-background-size: contain;
+    -moz-background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
 }
 
 @media (min-width: 768px) {
-    .responsive-topbar  {
+    .responsive-topbar {
         display: none;
     }
+
     .left-sidebar {
         z-index: 51;
     }

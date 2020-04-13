@@ -155,7 +155,7 @@
 
 
                 <div class="row">
-                    <div class="col-lg- col-md-12">
+                    <div class="col-lg-9 col-md-12">
                         <div class="card">
                             <div class="card-body">
                                 <div class="d-flex">
@@ -168,6 +168,35 @@
                                 </div>
                             </div>
                         </div>
+                    </div>
+                    <div class="col-lg-3 col-md-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="card-title"><span class="lstick"></span>London ON Weather</h4>
+                                <div id="weather-icon" style="height:100px; width:100%;"></div>
+                                <table class="table vm font-14">
+                                    <tr>
+                                        <td class="b-0" id="weather-reading"></td>
+                                        <td class="text-right font-medium b-0">
+                                            <div></div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="b-0" id="weather-reading">Current</td>
+                                        <td class="text-right font-medium b-0">
+                                            <div id="weather-temp"></div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="b-0" id="weather-reading">Feels Like</td>
+                                        <td class="text-right font-medium b-0">
+                                            <div id="weather-feel"></div>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
 
@@ -365,7 +394,7 @@
     </div>
     <template id="news-template">
         <a href="#">
-            <div class="user-img " id="news-item-image">
+            <div class="user-img news-item-image">
                 <span class="profile-status busy pull-right"></span>
             </div>
             <div id="news-container" class="mail-contnet">
@@ -376,7 +405,7 @@
     <script src="js/script.js"></script>
     <script src="js/navigation.js"></script>
     <script src="js/charts.js"></script>
-    <script src="js/news.js"></script>
+    <script src="js/info.js"></script>
 </body>
 
 </html>
