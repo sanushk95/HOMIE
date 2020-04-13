@@ -1,61 +1,83 @@
 <%- include ('partials/head.ejs') %>
-<%- include ('partials/menu.ejs') %> 
-    <div id="main_container" class="settings">
-    <%- include ('partials/userWelcome.ejs') %>
-    <div class="controls">
-
-            <div class="control_card">
-                <h4>> Activate House Protection Mode:</h4>
-                <div class="onoffswitch">
-                    <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch" checked>
-                    <label class="onoffswitch-label" for="myonoffswitch">
-                        <span class="onoffswitch-inner"></span>
-                        <span class="onoffswitch-switch"></span>
-                    </label>
-                </div>
-
-                <h4>> Activate Temperature Notifications:</h4>
-                <div class="onoffswitch">
-                    <input type="checkbox" name="myonoffswitch2" class="onoffswitch-checkbox" id="myonoffswitch2" checked>
-                    <label class="onoffswitch-label" for="myonoffswitch2">
-                        <span class="onoffswitch-inner"></span>
-                        <span class="onoffswitch-switch"></span>
-                    </label>
-                </div>
-
-                <h4>> Activate Weather Notifications:</h4>
-                <div class="onoffswitch">
-                    <input type="checkbox" name="myonoffswitch3" class="onoffswitch-checkbox" id="myonoffswitch3" checked>
-                    <label class="onoffswitch-label" for="myonoffswitch3">
-                        <span class="onoffswitch-inner"></span>
-                        <span class="onoffswitch-switch"></span>
-                    </label>
+<div id="main-wrapper">
+    <%- include ('partials/navbar.ejs') %>
+    <%- include ('partials/sidebar.ejs') %>
+    <div class="page-wrapper">
+        <div class="container-fluid">
+            <div class="row page-titles">
+                <div class="col-md-5 align-self-center">
+                    <h3 class="text-themecolor">Settings</h3>
                 </div>
             </div>
 
-            <div class="set_levels">
+            <div class="row">
+                <div class="col-lg-12 col-xlg-12">
+                    <div class="card">
+                        <div class="controls">
 
-                <div class="level_temp">
-                    <h4>> Set Temperature level</h4>
-                    <div class="slidecontainer">
-                        <input type="range" min="1" max="100" value="50" class="slider" id="myRange">
-                        <p>Lowest Level: <span id="demo"></span></p>
+                            <div class="control_card">
+                                <h4>> Activate House Protection Mode:</h4>
+                                <div class="onoffswitch">
+                                    <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox"
+                                        id="myonoffswitch" checked>
+                                    <label class="onoffswitch-label" for="myonoffswitch">
+                                        <span class="onoffswitch-inner"></span>
+                                        <span class="onoffswitch-switch"></span>
+                                    </label>
+                                </div>
+
+                                <h4>> Activate Temperature Notifications:</h4>
+                                <div class="onoffswitch">
+                                    <input type="checkbox" name="myonoffswitch2" class="onoffswitch-checkbox"
+                                        id="myonoffswitch2" checked>
+                                    <label class="onoffswitch-label" for="myonoffswitch2">
+                                        <span class="onoffswitch-inner"></span>
+                                        <span class="onoffswitch-switch"></span>
+                                    </label>
+                                </div>
+
+                                <h4>> Activate Weather Notifications:</h4>
+                                <div class="onoffswitch">
+                                    <input type="checkbox" name="myonoffswitch3" class="onoffswitch-checkbox"
+                                        id="myonoffswitch3" checked>
+                                    <label class="onoffswitch-label" for="myonoffswitch3">
+                                        <span class="onoffswitch-inner"></span>
+                                        <span class="onoffswitch-switch"></span>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="set_levels">
+
+                                <div class="level_temp">
+                                    <h4>> Set Temperature level</h4>
+                                    <div class="slidecontainer">
+                                        <input type="range" min="1" max="100" value="50" class="slider" id="myRange">
+                                        <p>Lowest Level: <span id="demo"></span></p>
+                                    </div>
+
+                                    <div class="slidecontainer">
+                                        <input type="range" min="1" max="100" value="50" class="slider" id="myRange2">
+                                        <p>Highest Level: <span id="demo2"></span></p>
+                                    </div>
+
+                                </div>
+
+                                <div class="level_roomname">
+                                    <label for="roomname">Room Name: </label><br>
+                                    <input type="text" name="roomname" />
+                                    <input type="submit" name="changeRoomName" value="Update">
+                                </div>
+
+                            </div>
+                        </div>
                     </div>
-
-                    <div class="slidecontainer">
-                        <input type="range" min="1" max="100" value="50" class="slider" id="myRange2">
-                        <p>Highest Level: <span id="demo2"></span></p>
-                    </div>
-
                 </div>
-
-                <div class="level_roomname">
-                    <label for="roomname">Room Name: </label><br>
-                    <input type="text" name="roomname"/>
-                    <input type="submit" name="changeRoomName" value="Update">
-                </div>
-
             </div>
         </div>
+        <div class="page-place-holder"></div>
     </div>
-<%- include ('partials/tail.ejs') %> 
+    <footer class="footer"></footer>
+</div>
+</div>
+<%- include ('partials/tail.ejs') %>

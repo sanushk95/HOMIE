@@ -26,4 +26,12 @@ router.get("/logs", (req, res, next) => {
     res.render("logs");
 });
 
+router.get("/account", (req, res, next) => {
+    res.render("account");
+});
+
+router.get("/signout", (req, res, next) => {
+    res.render("signout");
+});
+
 module.exports = router;

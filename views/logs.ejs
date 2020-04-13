@@ -1,71 +1,78 @@
 <%- include ('partials/head.ejs') %>
-<%- include ('partials/menu.ejs') %> 
-    <div id="main_container">
-        <%- include ('partials/userWelcome.ejs') %>                
-            <h1 class="page-head">Notification Logs:</h1>
-
-            <div class="notification_table">
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th>No.</th>
-                            <th>Messages</th>
-                            <th>Timestamps</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>01</td>
-                            <td>Movement detected in the house.</td>
-                            <td>2:30pm 21/5/2016</td>
-                        </tr>
-                        <tr>
-                            <td>01</td>
-                            <td>Movement detected in the house.</td>
-                            <td>2:30pm 21/5/2016</td>
-                        </tr>
-                        <tr>
-                            <td>01</td>
-                            <td>Movement detected in the house.</td>
-                            <td>2:30pm 21/5/2016</td>
-                        </tr>
-                        <tr>
-                            <td>01</td>
-                            <td>Movement detected in the house.</td>
-                            <td>2:30pm 21/5/2016</td>
-                        </tr>
-                        <tr>
-                            <td>01</td>
-                            <td>Movement detected in the house.</td>
-                            <td>2:30pm 21/5/2016</td>
-                        </tr>
-                        <tr>
-                            <td>01</td>
-                            <td>Movement detected in the house.</td>
-                            <td>2:30pm 21/5/2016</td>
-                        </tr>
-                        <tr>
-                            <td>01</td>
-                            <td>Movement detected in the house.</td>
-                            <td>2:30pm 21/5/2016</td>
-                        </tr>
-                        <tr>
-                            <td>01</td>
-                            <td>Movement detected in the house.</td>
-                            <td>2:30pm 21/5/2016</td>
-                        </tr>
-                        <tr>
-                            <td>01</td>
-                            <td>Movement detected in the house.</td>
-                            <td>2:30pm 21/5/2016</td>
-                        </tr>
-                        <tr>
-                            <td>01</td>
-                            <td>Movement detected in the house.</td>
-                            <td>2:30pm 21/5/2016</td>
-                        </tr>
-                    </tbody>
-                </table>
+<div id="main-wrapper">
+    <%- include ('partials/navbar.ejs') %>
+    <%- include ('partials/sidebar.ejs') %>
+    <div class="page-wrapper">
+        <div class="container-fluid">
+            <div class="row page-titles">
+                <div class="col-md-5 align-self-center">
+                    <h3 class="text-themecolor">Notification Logs</h3>
+                </div>
             </div>
+
+            <div class="row">
+                <div class="col-lg- col-md-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="d-flex">
+                                <h4 class="card-title"><span class="lstick"></span>Notification Logs</h4>
+                            </div>
+                            <div class="message-box contact-box">
+                                <div class="message-widget contact-widget">
+                                    <a href="#">
+                                        <div class="user-img"> <img src="images/weather.png" alt="user"
+                                                class="img-circle"> <span class="profile-status busy pull-right"></span>
+                                        </div>
+                                        <div class="mail-contnet">
+                                            <h5>Weather</h5> <span class="mail-desc">There's an indication of storm
+                                                by 5:00 PM.</span>
+                                        </div>
+                                    </a>
+                                    <a href="#">
+                                        <div class="user-img"> <img src="images/weather.png" alt="user"
+                                                class="img-circle"> <span class="profile-status busy pull-right"></span>
+                                        </div>
+                                        <div class="mail-contnet">
+                                            <h5>Weather</h5> <span class="mail-desc">There's an indication of storm
+                                                by 5:00 PM.</span>
+                                        </div>
+                                    </a>
+                                    <a href="#">
+                                        <div class="user-img"> <img src="images/weather.png" alt="user"
+                                                class="img-circle"> <span class="profile-status busy pull-right"></span>
+                                        </div>
+                                        <div class="mail-contnet">
+                                            <h5>Weather</h5> <span class="mail-desc">There's an indication of storm
+                                                by 5:00 PM.</span>
+                                        </div>
+                                    </a>
+                                    <a href="#">
+                                        <div class="user-img"> <img src="images/weather.png" alt="user"
+                                                class="img-circle"> <span class="profile-status busy pull-right"></span>
+                                        </div>
+                                        <div class="mail-contnet">
+                                            <h5>Weather</h5> <span class="mail-desc">There's an indication of storm
+                                                by 5:00 PM.</span>
+                                        </div>
+                                    </a>
+                                    <a href="#">
+                                        <div class="user-img"> <img src="images/weather.png" alt="user"
+                                                class="img-circle"> <span class="profile-status busy pull-right"></span>
+                                        </div>
+                                        <div class="mail-contnet">
+                                            <h5>Weather</h5> <span class="mail-desc">There's an indication of storm
+                                                by 5:00 PM.</span>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="page-place-holder"></div>
+        </div>
+        <footer class="footer"></footer>
     </div>
-<%- include ('partials/tail.ejs') %> 
+</div>
+<%- include ('partials/tail.ejs') %>

@@ -18,7 +18,6 @@
 
 .image-cropper img {
     display: inline;
-    height: 100%;
 }
 
 .news-item-image {
@@ -46,6 +45,11 @@
     background-position: center;
     height: 250px;
     width: 100%;
+}
+
+.page-place-holder {
+    height: 500px;
+    width:100%;
 }
 
 #lightBody {

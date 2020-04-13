@@ -1,46 +1,84 @@
 <%- include ('partials/head.ejs') %>
-<%- include ('partials/menu.ejs') %> 
-    <div id="main_container">
-        <%- include ('partials/userWelcome.ejs') %>
+<div id="main-wrapper">
+    <%- include ('partials/navbar.ejs') %>
+    <%- include ('partials/sidebar.ejs') %>
+    <div class="page-wrapper">
+        <div class="container-fluid">
+            <div class="row page-titles">
+                <div class="col-md-5 align-self-center">
+                    <h3 class="text-themecolor">Notification Alerts</h3>
+                </div>
+            </div>
 
-        <h1>Notification Alerts :</h1>
-
-        <div class="cards_collection">
-            <div class="card">
-                <h3>Weather:</h3>
-                <p>There's an indication of storm by 5:00 PM.</p>
+            <div class="row">
+                <div class="col-lg-12 col-md-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="d-flex">
+                                <div>
+                                    <h4 class="card-title"><span class="lstick"></span>Notification Alerts</h4>
+                                </div>
+                            </div>
+                            <div class="table-responsive m-t-20">
+                                <table class="table vm no-th-brd no-wrap pro-of-month">
+                                    <thead>
+                                        <tr>
+                                            <th colspan="1">No. Messages</th>
+                                            <th>Messages</th>
+                                            <th>Timestamps</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td style="width:50px;"><span class="round"><b>1</b></span></td>
+                                            <td>
+                                                <span class="mail-desc">There's an indication of storm by 5:00
+                                                    PM.</span>
+                                            </td>
+                                            <td>2:30pm 21/5/2016</td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width:50px;"><span class="round"><b>1</b></span></td>
+                                            <td>
+                                                <span class="mail-desc">There's an indication of storm by 5:00
+                                                    PM.</span>
+                                            </td>
+                                            <td>2:30pm 21/5/2016</td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width:50px;"><span class="round"><b>1</b></span></td>
+                                            <td>
+                                                <span class="mail-desc">There's an indication of storm by 5:00
+                                                    PM.</span>
+                                            </td>
+                                            <td>2:30pm 21/5/2016</td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width:50px;"><span class="round"><b>1</b></span></td>
+                                            <td>
+                                                <span class="mail-desc">There's an indication of storm by 5:00
+                                                    PM.</span>
+                                            </td>
+                                            <td>2:30pm 21/5/2016</td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width:50px;"><span class="round"><b>1</b></span></td>
+                                            <td>
+                                                <span class="mail-desc">There's an indication of storm by 5:00
+                                                    PM.</span>
+                                            </td>
+                                            <td>2:30pm 21/5/2016</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="card">
-                <h3>Weather:</h3>
-                <p>There's an indication of storm by 5:00 PM.</p>
-            </div>
-            <div class="card">
-                <h3>Weather:</h3>
-                <p>There's an indication of storm by 5:00 PM.</p>
-            </div>
-            <div class="card">
-                <h3>Weather:</h3>
-                <p>There's an indication of storm by 5:00 PM.</p>
-            </div>
-            <div class="card">
-                <h3>Weather:</h3>
-                <p>There's an indication of storm by 5:00 PM.</p>
-            </div>
-            <div class="card">
-                <h3>Weather:</h3>
-                <p>There's an indication of storm by 5:00 PM.</p>
-            </div>
-            <div class="card">
-                <h3>Weather:</h3>
-                <p>There's an indication of storm by 5:00 PM.</p>
-            </div><div class="card">
-                <h3>Weather:</h3>
-                <p>There's an indication of storm by 5:00 PM.</p>
-            </div><div class="card">
-                <h3>Weather:</h3>
-                <p>There's an indication of storm by 5:00 PM.</p>
-            </div>
+            <div class="page-place-holder"></div>
         </div>
+        <footer class="footer"></footer>
     </div>
-
-<%- include ('partials/tail.ejs') %> 
+</div>
+<%- include ('partials/tail.ejs') %>

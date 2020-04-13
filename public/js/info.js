@@ -4,7 +4,7 @@
 (function () {
     "use strict";
     let newsUrl = 'https://newsapi.org/v2/top-headlines?apiKey=42e54a01fdc844a3be2f81bd21073306&country=ca';
-    let weatherUrl = 'http://api.openweathermap.org/data/2.5/weather?q=London&units=metric&APPID=e7b467b78cd7cea3b40036b2cbba06c9';
+    let weatherUrl = 'http://api.openweathermap.org/data/2.5/weather?q=London,ca&units=metric&APPID=e7b467b78cd7cea3b40036b2cbba06c9';
     let newsList = [];
     let newsContainer = document.querySelector('#news-container');
 
