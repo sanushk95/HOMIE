@@ -45,6 +45,7 @@
     background-position: center;
     height: 250px;
     width: 100%;
+    opacity: 0.6;
 }
 
 .page-place-holder {
