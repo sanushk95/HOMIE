@@ -38,6 +38,32 @@
     background-position: center;
 }
 
+.reading-body {
+    background-size: contain;
+    -webkit-background-size: contain;
+    -moz-background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    height: 250px;
+    width: 100%;
+}
+
+#lightBody {
+    background-image: url('../images/bulb.png');
+}
+
+#humidityBody {
+    background-image: url('../images/humidity.png');
+}
+
+#temperatureBody {
+    background-image: url('../images/temperature.png');
+}
+
+#motionBody {
+    background-image: url('../images/motion.png');
+}
+
 @media (min-width: 768px) {
     .responsive-topbar {
         display: none;
