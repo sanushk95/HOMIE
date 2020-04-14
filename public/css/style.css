@@ -50,7 +50,7 @@
 
 .page-place-holder {
     height: 500px;
-    width:100%;
+    width: 100%;
 }
 
 #lightBody {
@@ -67,6 +67,19 @@
 
 #motionBody {
     background-image: url('../images/motion.png');
+}
+
+.sensor-reading {
+    font-size: 21px;
+    font-weight: 700;
+}
+
+.sensor-reading em{
+    color:rgb(194, 5, 5);
+}
+
+.sensor-reading i{
+    color:rgb(196, 196, 196);
 }
 
 @media (min-width: 768px) {

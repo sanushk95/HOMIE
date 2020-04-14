@@ -1,4 +1,6 @@
-var firebaseUtils = require("./firebaseUtil");
+let firebaseUtil = require("./firebaseUtil");
+let firebaseDbAdapter = require('./utils/firebaseDbAdapter');
+let emulator = require('./utils/emulator');
 
 let express = require('express');
 let app = express();
@@ -20,40 +22,24 @@ app.set('view engine', 'ejs');
 
 var admin = require("firebase-admin");
 //var serviceAccount = require("./firebase-key.json");
-var serviceAccount = firebaseUtils.getServiceAccount(); //Using encode object instead
+var serviceAccount = firebaseUtil.getServiceAccount(); //Using encode object instead
 
-
-admin.initializeApp({
-  credential: admin.credential.cert(serviceAccount),
-  databaseURL: "https://ims-hms.firebaseio.com"
-});
-const db = admin.firestore();
-
-let readings = [];
-db.collection("readings")
-  .get()
-  .then(snapshot => {
-    snapshot.forEach(doc => {
-      let movie = doc.data();
-      movie.id = doc.id;
-      readings.push(movie);
-      console.log(movie);
-    });
-  })
-  .catch(err => {
-    if (err) {
-      console.log("Error getting documents", err);
-    }
+try {
+  admin.initializeApp({
+    credential: admin.credential.cert(serviceAccount),
+    databaseURL: "https://ims-hms.firebaseio.com"
   });
+  const db = admin.firestore();
+  firebaseDbAdapter.setDb(db);
 
+  //Note: Writes to firebase cloud storage is disable in development
+  //      to conserve usage
+  firebaseDbAdapter.disableWrites();
 
-
-
-/*db.collection("readings").add({
-  sensor: "temperature",
-  value: "4",
-  date: '2020-04-13'
-});*/
+  firebaseDbAdapter.read(db, 'light');
+} catch (e) {
+  console.log(e);
+}
 
 
 app.use(logger('dev'));
@@ -110,6 +96,7 @@ arduino.on("ready", function () {
   photoresistor.on("data", function () {
     setInterval(() => {
       io.sockets.emit('lightsensor', this.value);
+      firebaseDbAdapter.write('light', this.value);
     }, 100);
     //console.log(this.value);
   });
@@ -118,9 +105,11 @@ arduino.on("ready", function () {
 
     setInterval(() => {
       io.sockets.emit('temp', this.thermometer.celsius)
+      firebaseDbAdapter.write('temperature', this.thermometer.celsius);
     }, 100);
     setInterval(() => {
-      io.sockets.emit('humidity', this.hygrometer.relativeHumidity)
+      io.sockets.emit('humidity', this.hygrometer.relativeHumidity);
+      firebaseDbAdapter.write('humidity', this.hygrometer.relativeHumidity);
     }, 100);
 
   });
@@ -134,7 +123,6 @@ arduino.on("ready", function () {
     console.log("calibrated");
   });
 
-
   motion.on("motionstart", function () {
     console.log("motionstart");
   });
@@ -145,12 +133,64 @@ arduino.on("ready", function () {
   });
 
   motion.on("data", function (data) {
-
     io.sockets.emit('motionElement', this.detectedMotion);
-
-
-
+    if (this.detectedMotion) {
+      firebaseDbAdapter.write('motion', 'Motion was detected');
+    }
   });
+});
+
+//Note: These emulators are only enabled for development
+//      when the real arduino board is not available
+//      Please disable in production mode
+emulator.EmulatorAdaptor.disable();
+emulator.EmulatorAdaptor.addSensor({
+  name: "temperature",
+  interval: 3000,
+  range: [53, 70],
+  onchange: function (sender) {
+    var value = sender.value;
+    io.sockets.emit('temp', value);
+    firebaseDbAdapter.write('temperature', value);
+    console.log(new Date().toISOString());
+  }
+});
+emulator.EmulatorAdaptor.addSensor({
+  name: "light",
+  interval: 10000,
+  range: [53, 70],
+  onchange: function (sender) {
+    var value = sender.value;
+    io.sockets.emit('lightsensor', value);
+    firebaseDbAdapter.write('light', value);
+    console.log(new Date().toISOString());
+  }
+});
+
+emulator.EmulatorAdaptor.addSensor({
+  name: "humidity",
+  interval: 10000,
+  range: [53, 70],
+  onchange: function (sender) {
+    var value = sender.value;
+    io.sockets.emit('humidity', value);
+    firebaseDbAdapter.write('humidity', value);
+    console.log(new Date().toISOString());
+  }
+});
+
+emulator.EmulatorAdaptor.addSensor({
+  name: "motion",
+  interval: 2000,
+  range: [0, 1],
+  onchange: function (sender) {
+    var value = !!sender.value;
+    io.sockets.emit('motionElement', value);
+    if (value) {
+      firebaseDbAdapter.write('motion', 'Motion was detected');
+    }
+    console.log(new Date().toISOString());
+  }
 });
 
 

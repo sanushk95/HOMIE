@@ -6,15 +6,19 @@
 	let lightElement =document.querySelector("#lightElement");
 	let humidityElement = document.querySelector("#humidityElement");
 
+	let motionBody = document.querySelector("#motionBody");
+
 	socket.on("motionElement",function(data){	
 			
 		if(data==true)
 		{
-			motionElement.innerHTML = `<h3>Active</h3>`;
+			motionElement.innerHTML = `<em>Active</em>`;
+			motionBody.style.opacity = "1.0";
 		}
 		else
 		{
-			motionElement.innerHTML = `<h3>Inactive</h3>`;
+			motionElement.innerHTML = `<i>Inactive</i>`;
+			motionBody.style.opacity = "0.05";
 		}
 	});
 	socket.on("temp", (data) => {

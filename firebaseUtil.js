@@ -12,7 +12,7 @@ module.exports = {
             var contentEncrypted = fs.readFileSync(filename, 'utf8');
             var buffer = Buffer.from(contentEncrypted, 'base64');
             contentDecrypted = buffer.toString();
-            console.log(contentDecrypted);
+            //console.log(contentDecrypted);
             return contentDecrypted;
         } catch (e) {
             callback(e);
