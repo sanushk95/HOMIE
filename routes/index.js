@@ -14,6 +14,7 @@ router.get("/", (req, res, next) => {
         });
 });
 
+
 router.get("/settings", (req, res, next) => {
     res.render("settings");
 });
