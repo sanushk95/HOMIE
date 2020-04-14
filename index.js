@@ -1,5 +1,4 @@
-var fs = require('fs');
-var admin = require("firebase-admin");
+var firebaseUtils = require("./firebaseUtil");
 
 let express = require('express');
 let app = express();
@@ -19,28 +18,10 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
 
-function readModuleFile(path, callback) {
-  try {
-    var filename = require.resolve(path);
-    //fs.readFile(filename, 'utf8', callback);
-    //var buffer = new Buffer(contents);
-    //content = buffer.toString('base64');
-    //Buffer.alloc(number) 
-    var contentEncrypted = fs.readFileSync(filename, 'utf8');
-    var buffer = Buffer.from(contentEncrypted, 'base64');
-    contentDecrypted = buffer.toString();
-    console.log(contentDecrypted);
-    return contentDecrypted;
-  } catch (e) {
-    callback(e);
-    console.log(e);
-  }
-}
-
+var admin = require("firebase-admin");
 //var serviceAccount = require("./firebase-key.json");
-var fileContent = readModuleFile("./firebase-key-encrypted");
-var obj = JSON.parse(fileContent);
-const serviceAccount = Object.assign(obj, admin.ServiceAccount);
+var serviceAccount = firebaseUtils.getServiceAccount(); //Using encode object instead
+
 
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
