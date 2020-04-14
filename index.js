@@ -25,8 +25,9 @@ function readModuleFile(path, callback) {
     //fs.readFile(filename, 'utf8', callback);
     //var buffer = new Buffer(contents);
     //content = buffer.toString('base64');
+    //Buffer.alloc(number) 
     var contentEncrypted = fs.readFileSync(filename, 'utf8');
-    var buffer = new Buffer(contentEncrypted, 'base64')
+    var buffer = Buffer.from(contentEncrypted, 'base64');
     contentDecrypted = buffer.toString();
     console.log(contentDecrypted);
     return contentDecrypted;
