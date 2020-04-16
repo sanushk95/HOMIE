@@ -13,7 +13,7 @@ const client = require('twilio')(accountSid, authToken);
 
 let isSent = false;
 
-var isEnabled = false;
+var isEnabled = true;
 const fromNumber = '+15017122661';
 const toNumber = '+15558675310';
 

@@ -113,14 +113,14 @@ arduino.on("ready", function () {
       io.sockets.emit('temp', this.thermometer.celsius)
       firebaseDbAdapter.write('temperature', this.thermometer.celsius);
 
-      if (!isSent) {
-        if (this.thermometer.celsius < 15) {
-          twillioApi.ApiAdaptor.sendsms("The Temperature Level has dropped, please adjust accordingly. Thank you!!!");
-        }
-        else if (this.thermometer.celsius > 28) {
-          twillioApi.ApiAdaptor.sendsms("The Temperature Level has increased, please adjust accordingly. Thank you!!!");
-        }
+      //if (!isSent) {
+      if (this.thermometer.celsius < 15) {
+        twillioApi.ApiAdaptor.sendsms("The Temperature Level has dropped, please adjust accordingly. Thank you!!!");
       }
+      else if (this.thermometer.celsius > 28) {
+        twillioApi.ApiAdaptor.sendsms("The Temperature Level has increased, please adjust accordingly. Thank you!!!");
+      }
+      //}
     }, 2000);
     setInterval(() => {
       io.sockets.emit('humidity', this.hygrometer.relativeHumidity);
@@ -168,7 +168,13 @@ emulator.EmulatorAdaptor.addSensor({
     var value = sender.value;
     io.sockets.emit('temp', value);
     //firebaseDbAdapter.write('temperature', value);
-    console.log('temperature ' + new Date().toISOString());
+    if (value< 15) {
+      twillioApi.ApiAdaptor.sendsms("The Temperature Level has dropped, please adjust accordingly. Thank you!!!");
+    }
+    else if (value > 28) {
+      twillioApi.ApiAdaptor.sendsms("The Temperature Level has increased, please adjust accordingly. Thank you!!!");
+    }
+    //console.log('temperature ' + new Date().toISOString());
   }
 });
 emulator.EmulatorAdaptor.addSensor({
@@ -179,7 +185,7 @@ emulator.EmulatorAdaptor.addSensor({
     var value = sender.value;
     io.sockets.emit('lightsensor', value);
     //firebaseDbAdapter.write('light', value);
-    console.log('motion ' + new Date().toISOString());
+    //console.log('motion ' + new Date().toISOString());
   }
 });
 
@@ -191,7 +197,7 @@ emulator.EmulatorAdaptor.addSensor({
     var value = sender.value;
     io.sockets.emit('humidity', value);
     //firebaseDbAdapter.write('humidity', value);
-    console.log('temperature ' + new Date().toISOString());
+    //console.log('temperature ' + new Date().toISOString());
   }
 });
 
@@ -206,7 +212,7 @@ emulator.EmulatorAdaptor.addSensor({
       //firebaseDbAdapter.write('motion', 'Motion was detected');
       twillioApi.ApiAdaptor.sendsms('A movement was detected in your home');
     }
-    console.log('motion ' + new Date().toISOString());
+    //console.log('motion ' + new Date().toISOString());
   }
 });
 
