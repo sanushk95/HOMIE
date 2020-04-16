@@ -84,11 +84,11 @@ let arduino = new five.Board();
 arduino.on("ready", function () {
   var multi = new five.Multi({
     controller: "HTU21D",
-    freq: 500
+    freq: 1000
   });
   photoresistor = new five.Sensor({
     pin: "A2",
-    freq: 700,
+    freq: 1000,
     threshold: 50
   });
   arduino.repl.inject({
@@ -98,7 +98,7 @@ arduino.on("ready", function () {
     setInterval(() => {
       io.sockets.emit('lightsensor', this.value);
       firebaseDbAdapter.write('light', this.value);
-    }, 100);
+    }, 2000);
     //console.log(this.value);
   });
 
@@ -107,11 +107,11 @@ arduino.on("ready", function () {
     setInterval(() => {
       io.sockets.emit('temp', this.thermometer.celsius)
       firebaseDbAdapter.write('temperature', this.thermometer.celsius);
-    }, 100);
+    }, 2000);
     setInterval(() => {
       io.sockets.emit('humidity', this.hygrometer.relativeHumidity);
       firebaseDbAdapter.write('humidity', this.hygrometer.relativeHumidity);
-    }, 100);
+    }, 2000);
 
   });
 });
