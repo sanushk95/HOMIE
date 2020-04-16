@@ -11,6 +11,7 @@ let path = require('path');
 let cookieParser = require('cookie-parser');
 let logger = require('morgan');
 
+var admin = require("firebase-admin");
 //Importing routes for news.
 let newsRoutes = require("./routes/get_news");
 let indexRoutes = require("./routes/index");
@@ -20,9 +21,9 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
 
-var admin = require("firebase-admin");
+
 //var serviceAccount = require("./firebase-key.json");
-var serviceAccount = firebaseUtil.getServiceAccount(); //Using encode object instead
+let serviceAccount = firebaseUtil.getServiceAccount(); //Using encode object instead
 
 try {
   admin.initializeApp({
@@ -36,7 +37,7 @@ try {
   //      to conserve usage
   firebaseDbAdapter.disableWrites();
 
-  firebaseDbAdapter.read(db, 'light');
+  //firebaseDbAdapter.read(db, 'light', callback);
 } catch (e) {
   console.log(e);
 }

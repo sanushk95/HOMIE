@@ -29,46 +29,15 @@
                                         </tr>
                                     </thead>
                                     <tbody>
+                                        <% for(let i = 0; i < notifications.length; i++) { %>
                                         <tr>
                                             <td style="width:50px;"><span class="round"><b>1</b></span></td>
                                             <td>
-                                                <span class="mail-desc">There's an indication of storm by 5:00
-                                                    PM.</span>
+                                                <span class="mail-desc"><%= notifications[i].message %></span>
                                             </td>
-                                            <td>2:30pm 21/5/2016</td>
+                                            <td><%= notifications[i].time %></td>
                                         </tr>
-                                        <tr>
-                                            <td style="width:50px;"><span class="round"><b>1</b></span></td>
-                                            <td>
-                                                <span class="mail-desc">There's an indication of storm by 5:00
-                                                    PM.</span>
-                                            </td>
-                                            <td>2:30pm 21/5/2016</td>
-                                        </tr>
-                                        <tr>
-                                            <td style="width:50px;"><span class="round"><b>1</b></span></td>
-                                            <td>
-                                                <span class="mail-desc">There's an indication of storm by 5:00
-                                                    PM.</span>
-                                            </td>
-                                            <td>2:30pm 21/5/2016</td>
-                                        </tr>
-                                        <tr>
-                                            <td style="width:50px;"><span class="round"><b>1</b></span></td>
-                                            <td>
-                                                <span class="mail-desc">There's an indication of storm by 5:00
-                                                    PM.</span>
-                                            </td>
-                                            <td>2:30pm 21/5/2016</td>
-                                        </tr>
-                                        <tr>
-                                            <td style="width:50px;"><span class="round"><b>1</b></span></td>
-                                            <td>
-                                                <span class="mail-desc">There's an indication of storm by 5:00
-                                                    PM.</span>
-                                            </td>
-                                            <td>2:30pm 21/5/2016</td>
-                                        </tr>
+                                        <% } %>
                                     </tbody>
                                 </table>
                             </div>

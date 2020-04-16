@@ -19,51 +19,16 @@
                             </div>
                             <div class="message-box contact-box">
                                 <div class="message-widget contact-widget">
+                                    <% for(let i = 0; i < logs.length; i++) { %>
                                     <a href="#">
-                                        <div class="user-img"> <img src="images/weather.png" alt="user"
+                                        <div class="user-img"> <img src="images/<%= logs[i].icon %>.png" alt="user"
                                                 class="img-circle"> <span class="profile-status busy pull-right"></span>
                                         </div>
                                         <div class="mail-contnet">
-                                            <h5>Weather</h5> <span class="mail-desc">There's an indication of storm
-                                                by 5:00 PM.</span>
+                                            <h5><%= logs[i].type %></h5> <span class="mail-desc"><%= logs[i].message %></span>
                                         </div>
                                     </a>
-                                    <a href="#">
-                                        <div class="user-img"> <img src="images/weather.png" alt="user"
-                                                class="img-circle"> <span class="profile-status busy pull-right"></span>
-                                        </div>
-                                        <div class="mail-contnet">
-                                            <h5>Weather</h5> <span class="mail-desc">There's an indication of storm
-                                                by 5:00 PM.</span>
-                                        </div>
-                                    </a>
-                                    <a href="#">
-                                        <div class="user-img"> <img src="images/weather.png" alt="user"
-                                                class="img-circle"> <span class="profile-status busy pull-right"></span>
-                                        </div>
-                                        <div class="mail-contnet">
-                                            <h5>Weather</h5> <span class="mail-desc">There's an indication of storm
-                                                by 5:00 PM.</span>
-                                        </div>
-                                    </a>
-                                    <a href="#">
-                                        <div class="user-img"> <img src="images/weather.png" alt="user"
-                                                class="img-circle"> <span class="profile-status busy pull-right"></span>
-                                        </div>
-                                        <div class="mail-contnet">
-                                            <h5>Weather</h5> <span class="mail-desc">There's an indication of storm
-                                                by 5:00 PM.</span>
-                                        </div>
-                                    </a>
-                                    <a href="#">
-                                        <div class="user-img"> <img src="images/weather.png" alt="user"
-                                                class="img-circle"> <span class="profile-status busy pull-right"></span>
-                                        </div>
-                                        <div class="mail-contnet">
-                                            <h5>Weather</h5> <span class="mail-desc">There's an indication of storm
-                                                by 5:00 PM.</span>
-                                        </div>
-                                    </a>
+                                    <% } %>
                                 </div>
                             </div>
                         </div>
