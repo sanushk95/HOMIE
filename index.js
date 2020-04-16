@@ -40,7 +40,7 @@ try {
 }
 
 //Temporarily disable SMS service in development mode
-twillioApi.ApiAdaptor.disable();
+twillioApi.ApiAdaptor.enable();
 
 
 
@@ -159,7 +159,7 @@ arduino.on("ready", function () {
 //Note: These emulators are only enabled for development
 //      when the real arduino board is not available
 //      Please disable in production mode
-emulator.EmulatorAdaptor.enable();
+emulator.EmulatorAdaptor.disable();
 emulator.EmulatorAdaptor.addSensor({
   name: "temperature",
   interval: 3000,

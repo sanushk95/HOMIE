@@ -21,14 +21,18 @@ module.exports = {
     ApiAdaptor: {
         sendsms: function (message) {
             if (isEnabled) {
+                console.log('Sending message:' + message);
                 client.messages
                     .create({
                         body: message,
                         from: fromNumber,
                         to: toNumber
                     })
-                    .then(message => console.log(message.sid));
-                isSent = true;
+                    .then(message => function(){
+                        console.log(message.sid);
+                        isSent = true;
+                        console.log('Message Sent!');
+                    });
             } else {
                 console.log('***Development mode*** ');
                 console.log('Twillio Api: message ---> ' + message);
