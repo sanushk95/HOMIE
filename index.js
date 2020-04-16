@@ -1,6 +1,7 @@
 let firebaseUtil = require("./firebaseUtil");
 let firebaseDbAdapter = require('./utils/firebaseDbAdapter');
 let emulator = require('./utils/emulator');
+let twillioApi = require('./utils/twillio-api');
 
 let express = require('express');
 let app = express();
@@ -13,31 +14,10 @@ let logger = require('morgan');
 
 var admin = require("firebase-admin");
 
-// Download the helper library from https://www.twilio.com/docs/node/install
-// Your Account Sid and Auth Token from twilio.com/console
-// DANGER! This is insecure. See http://twil.io/secure
-const accountSid = 'ACa6fda777a50942d69faaa5f36528630d';
-const authToken = 'be6f6f239bc9df2e7d4b4690e51cdcb5';
-const client = require('twilio')(accountSid, authToken);
-
 //Importing routes for news.
 let newsRoutes = require("./routes/get_news");
 let indexRoutes = require("./routes/index");
 
-// view engine setup
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'ejs');
-
-let isSent = false;
-function sendsms(message) {
-  client.messages
-  .create({
-     body: message,
-     from: '+13069947863',
-     to: '+15196366439'
-   })
-  .then(message => console.log(message.sid));
-}
 
 //var serviceAccount = require("./firebase-key.json");
 let serviceAccount = firebaseUtil.getServiceAccount(); //Using encode object instead
@@ -59,6 +39,14 @@ try {
   console.log(e);
 }
 
+//Temporarily disable SMS service in development mode
+twillioApi.ApiAdaptor.disable();
+
+
+
+// view engine setup
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'ejs');
 
 app.use(logger('dev'));
 app.use(express.json());
@@ -125,14 +113,12 @@ arduino.on("ready", function () {
       io.sockets.emit('temp', this.thermometer.celsius)
       firebaseDbAdapter.write('temperature', this.thermometer.celsius);
 
-      if(!isSent){
-        if(this.thermometer.celsius<15) {
-          sendsms("The Temperature Level has dropped, please adjust accordingly. Thank you!!!");
-          isSent=true;
+      if (!isSent) {
+        if (this.thermometer.celsius < 15) {
+          twillioApi.ApiAdaptor.sendsms("The Temperature Level has dropped, please adjust accordingly. Thank you!!!");
         }
-        else if(this.thermometer.celsius>28) {
-          sendsms("The Temperature Level has increased, please adjust accordingly. Thank you!!!");
-          isSent=true;
+        else if (this.thermometer.celsius > 28) {
+          twillioApi.ApiAdaptor.sendsms("The Temperature Level has increased, please adjust accordingly. Thank you!!!");
         }
       }
     }, 2000);
@@ -165,6 +151,7 @@ arduino.on("ready", function () {
     io.sockets.emit('motionElement', this.detectedMotion);
     if (this.detectedMotion) {
       firebaseDbAdapter.write('motion', 'Motion was detected');
+      twillioApi.ApiAdaptor.sendsms('A movement was detected in your home');
     }
   });
 });
@@ -172,7 +159,7 @@ arduino.on("ready", function () {
 //Note: These emulators are only enabled for development
 //      when the real arduino board is not available
 //      Please disable in production mode
-emulator.EmulatorAdaptor.disable();
+emulator.EmulatorAdaptor.enable();
 emulator.EmulatorAdaptor.addSensor({
   name: "temperature",
   interval: 3000,
@@ -181,7 +168,7 @@ emulator.EmulatorAdaptor.addSensor({
     var value = sender.value;
     io.sockets.emit('temp', value);
     //firebaseDbAdapter.write('temperature', value);
-    console.log( 'temperature ' + new Date().toISOString());
+    console.log('temperature ' + new Date().toISOString());
   }
 });
 emulator.EmulatorAdaptor.addSensor({
@@ -217,6 +204,7 @@ emulator.EmulatorAdaptor.addSensor({
     io.sockets.emit('motionElement', value);
     if (value) {
       //firebaseDbAdapter.write('motion', 'Motion was detected');
+      twillioApi.ApiAdaptor.sendsms('A movement was detected in your home');
     }
     console.log('motion ' + new Date().toISOString());
   }
