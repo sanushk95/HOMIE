@@ -12,6 +12,14 @@ let cookieParser = require('cookie-parser');
 let logger = require('morgan');
 
 var admin = require("firebase-admin");
+
+// Download the helper library from https://www.twilio.com/docs/node/install
+// Your Account Sid and Auth Token from twilio.com/console
+// DANGER! This is insecure. See http://twil.io/secure
+const accountSid = 'ACa6fda777a50942d69faaa5f36528630d';
+const authToken = 'be6f6f239bc9df2e7d4b4690e51cdcb5';
+const client = require('twilio')(accountSid, authToken);
+
 //Importing routes for news.
 let newsRoutes = require("./routes/get_news");
 let indexRoutes = require("./routes/index");
@@ -20,7 +28,16 @@ let indexRoutes = require("./routes/index");
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
-
+let isSent = false;
+function sendsms(message) {
+  client.messages
+  .create({
+     body: message,
+     from: '+13069947863',
+     to: '+15196366439'
+   })
+  .then(message => console.log(message.sid));
+}
 
 //var serviceAccount = require("./firebase-key.json");
 let serviceAccount = firebaseUtil.getServiceAccount(); //Using encode object instead
@@ -107,6 +124,17 @@ arduino.on("ready", function () {
     setInterval(() => {
       io.sockets.emit('temp', this.thermometer.celsius)
       firebaseDbAdapter.write('temperature', this.thermometer.celsius);
+
+      if(!isSent){
+        if(this.thermometer.celsius<15) {
+          sendsms("The Temperature Level has dropped, please adjust accordingly. Thank you!!!");
+          isSent=true;
+        }
+        else if(this.thermometer.celsius>28) {
+          sendsms("The Temperature Level has increased, please adjust accordingly. Thank you!!!");
+          isSent=true;
+        }
+      }
     }, 2000);
     setInterval(() => {
       io.sockets.emit('humidity', this.hygrometer.relativeHumidity);
