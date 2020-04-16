@@ -148,35 +148,35 @@ emulator.EmulatorAdaptor.disable();
 emulator.EmulatorAdaptor.addSensor({
   name: "temperature",
   interval: 3000,
-  range: [53, 70],
+  range: [10, 40],
   onchange: function (sender) {
     var value = sender.value;
     io.sockets.emit('temp', value);
-    firebaseDbAdapter.write('temperature', value);
-    console.log(new Date().toISOString());
+    //firebaseDbAdapter.write('temperature', value);
+    console.log( 'temperature ' + new Date().toISOString());
   }
 });
 emulator.EmulatorAdaptor.addSensor({
   name: "light",
-  interval: 10000,
-  range: [53, 70],
+  interval: 3000,
+  range: [100, 1023],
   onchange: function (sender) {
     var value = sender.value;
     io.sockets.emit('lightsensor', value);
-    firebaseDbAdapter.write('light', value);
-    console.log(new Date().toISOString());
+    //firebaseDbAdapter.write('light', value);
+    console.log('motion ' + new Date().toISOString());
   }
 });
 
 emulator.EmulatorAdaptor.addSensor({
   name: "humidity",
-  interval: 10000,
-  range: [53, 70],
+  interval: 3000,
+  range: [10, 40],
   onchange: function (sender) {
     var value = sender.value;
     io.sockets.emit('humidity', value);
-    firebaseDbAdapter.write('humidity', value);
-    console.log(new Date().toISOString());
+    //firebaseDbAdapter.write('humidity', value);
+    console.log('temperature ' + new Date().toISOString());
   }
 });
 
@@ -188,9 +188,9 @@ emulator.EmulatorAdaptor.addSensor({
     var value = !!sender.value;
     io.sockets.emit('motionElement', value);
     if (value) {
-      firebaseDbAdapter.write('motion', 'Motion was detected');
+      //firebaseDbAdapter.write('motion', 'Motion was detected');
     }
-    console.log(new Date().toISOString());
+    console.log('motion ' + new Date().toISOString());
   }
 });
 
