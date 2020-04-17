@@ -31,11 +31,11 @@
                                     <tbody>
                                         <% for(let i = 0; i < notifications.length; i++) { %>
                                         <tr>
-                                            <td style="width:50px;"><span class="round"><b>1</b></span></td>
+                                            <td style="width:50px;"><span class="round"><b><%= i+1 %></b></span></td>
                                             <td>
                                                 <span class="mail-desc"><%= notifications[i].message %></span>
                                             </td>
-                                            <td><%= notifications[i].time %></td>
+                                            <td><%= notifications[i].timestamp %></td>
                                         </tr>
                                         <% } %>
                                     </tbody>
