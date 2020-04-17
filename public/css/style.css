@@ -74,13 +74,15 @@
     font-weight: 700;
 }
 
-.sensor-reading em{
-    color:rgb(194, 5, 5);
+.sensor-reading em {
+    color: rgb(194, 5, 5);
 }
 
-.sensor-reading i{
-    color:rgb(196, 196, 196);
+.sensor-reading i {
+    color: rgb(196, 196, 196);
 }
+
+
 
 @media (min-width: 768px) {
     .responsive-topbar {
@@ -90,4 +92,12 @@
     .left-sidebar {
         z-index: 51;
     }
+}
+
+.sidebar-logo {
+    display: none;
+}
+.sidebar-logo:not(.mini-sidebar ){
+    padding: 12px 18px;
+    display: block;
 }
