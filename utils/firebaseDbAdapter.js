@@ -47,12 +47,13 @@ module.exports = {
                         console.log("Error writing document", err);
                     }
                 });
+                console.log("Sensor information saved");
             } catch (e) {
                 console.log(e);
             }
         }
     },
-    getLogs: function(callback){
+    getLogs: function (callback) {
         let logsArr = [];
         try {
             this.db.collection("logs")
@@ -75,7 +76,7 @@ module.exports = {
         }
         return logsArr;
     },
-    getNotifications: function(callback){
+    getNotifications: function (callback) {
         let notificationsArr = [];
         try {
             this.db.collection("notifications")

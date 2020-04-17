@@ -32,7 +32,7 @@ try {
 
   //Note: Writes to firebase cloud storage is disable in development
   //      to conserve usage
-  firebaseDbAdapter.disableWrites();
+  firebaseDbAdapter.enableWrites();
 
   //firebaseDbAdapter.read(db, 'light', callback);
 } catch (e) {
@@ -162,7 +162,7 @@ arduino.on("ready", function () {
 emulator.EmulatorAdaptor.disable();
 emulator.EmulatorAdaptor.addSensor({
   name: "temperature",
-  interval: 3000,
+  interval: 10000,
   range: [10, 40],
   onchange: function (sender) {
     var value = sender.value;
@@ -179,37 +179,37 @@ emulator.EmulatorAdaptor.addSensor({
 });
 emulator.EmulatorAdaptor.addSensor({
   name: "light",
-  interval: 3000,
+  interval: 10000,
   range: [100, 1023],
   onchange: function (sender) {
     var value = sender.value;
     io.sockets.emit('lightsensor', value);
-    //firebaseDbAdapter.write('light', value);
+    firebaseDbAdapter.write('light', value);
     //console.log('motion ' + new Date().toISOString());
   }
 });
 
 emulator.EmulatorAdaptor.addSensor({
   name: "humidity",
-  interval: 3000,
+  interval: 10000,
   range: [10, 40],
   onchange: function (sender) {
     var value = sender.value;
     io.sockets.emit('humidity', value);
-    //firebaseDbAdapter.write('humidity', value);
+    firebaseDbAdapter.write('humidity', value);
     //console.log('temperature ' + new Date().toISOString());
   }
 });
 
 emulator.EmulatorAdaptor.addSensor({
   name: "motion",
-  interval: 2000,
+  interval: 10000,
   range: [0, 1],
   onchange: function (sender) {
     var value = !!sender.value;
     io.sockets.emit('motionElement', value);
     if (value) {
-      //firebaseDbAdapter.write('motion', 'Motion was detected');
+      firebaseDbAdapter.write('motion', 'Motion was detected');
       twillioApi.ApiAdaptor.sendsms('A movement was detected in your home');
     }
     //console.log('motion ' + new Date().toISOString());
