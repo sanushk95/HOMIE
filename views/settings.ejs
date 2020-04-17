@@ -12,65 +12,84 @@
 
             <div class="row">
                 <div class="col-lg-12 col-xlg-12">
-                    <div class="card">
-                        <div class="controls">
-
-                            <div class="control_card">
-                                <h4>> Activate House Protection Mode:</h4>
-                                <div class="onoffswitch">
-                                    <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox"
-                                        id="myonoffswitch" checked>
-                                    <label class="onoffswitch-label" for="myonoffswitch">
-                                        <span class="onoffswitch-inner"></span>
-                                        <span class="onoffswitch-switch"></span>
-                                    </label>
-                                </div>
-
-                                <h4>> Activate Temperature Notifications:</h4>
-                                <div class="onoffswitch">
-                                    <input type="checkbox" name="myonoffswitch2" class="onoffswitch-checkbox"
-                                        id="myonoffswitch2" checked>
-                                    <label class="onoffswitch-label" for="myonoffswitch2">
-                                        <span class="onoffswitch-inner"></span>
-                                        <span class="onoffswitch-switch"></span>
-                                    </label>
-                                </div>
-
-                                <h4>> Activate Weather Notifications:</h4>
-                                <div class="onoffswitch">
-                                    <input type="checkbox" name="myonoffswitch3" class="onoffswitch-checkbox"
-                                        id="myonoffswitch3" checked>
-                                    <label class="onoffswitch-label" for="myonoffswitch3">
-                                        <span class="onoffswitch-inner"></span>
-                                        <span class="onoffswitch-switch"></span>
-                                    </label>
-                                </div>
-                            </div>
-
-                            <div class="set_levels">
-
-                                <div class="level_temp">
-                                    <h4>> Set Temperature level</h4>
-                                    <div class="slidecontainer">
-                                        <input type="range" min="1" max="100" value="50" class="slider" id="myRange">
-                                        <p>Lowest Level: <span id="demo"></span></p>
+                    <div class="card p-4">
+                        <form action="" id="settingsForm" method="POST">
+                            <div class="controls">
+                                <div class="control_card">
+                                    <h4>> Activate House Protection Mode:</h4>
+                                    <div class="onoffswitch">
+                                        <% if(preferences.sendMotionNotification) { %>
+                                            <input type="checkbox" name="myonoffswitch" class="onoffswitch-checkbox"
+                                                id="myonoffswitch" checked>
+                                        <% } else { %>
+                                            <input type="checkbox" name="myonoffswitch" class="onoffswitch-checkbox"
+                                                id="myonoffswitch">
+                                        <% } %>
+                                        <label class="onoffswitch-label" for="myonoffswitch">
+                                            <span class="onoffswitch-inner"></span>
+                                            <span class="onoffswitch-switch"></span>
+                                        </label>
                                     </div>
 
-                                    <div class="slidecontainer">
-                                        <input type="range" min="1" max="100" value="50" class="slider" id="myRange2">
-                                        <p>Highest Level: <span id="demo2"></span></p>
+                                    <h4>> Activate Temperature Notifications:</h4>
+                                    <div class="onoffswitch">
+                                        <% if(preferences.sendTempNotification) { %>
+                                            <input type="checkbox" name="myonoffswitch2" class="onoffswitch-checkbox"
+                                                id="myonoffswitch2" checked>
+                                        <% } else { %>
+                                            <input type="checkbox" name="myonoffswitch2" class="onoffswitch-checkbox"
+                                                id="myonoffswitch2">
+                                        <% } %>
+                                        <label class="onoffswitch-label" for="myonoffswitch2">
+                                            <span class="onoffswitch-inner"></span>
+                                            <span class="onoffswitch-switch"></span>
+                                        </label>
                                     </div>
 
+                                    <h4>> Activate Weather Notifications:</h4>
+                                    <div class="onoffswitch">
+                                        <% if(preferences.sendWeatherNotification) { %>
+                                            <input type="checkbox" name="myonoffswitch3" class="onoffswitch-checkbox"
+                                                id="myonoffswitch3" checked>
+                                        <% } else { %>
+                                            <input type="checkbox" name="myonoffswitch3" class="onoffswitch-checkbox"
+                                                id="myonoffswitch3">
+                                        <% } %>
+                                        <label class="onoffswitch-label" for="myonoffswitch3">
+                                            <span class="onoffswitch-inner"></span>
+                                            <span class="onoffswitch-switch"></span>
+                                        </label>
+                                    </div>
                                 </div>
 
-                                <div class="level_roomname">
-                                    <label for="roomname">Room Name: </label><br>
-                                    <input type="text" name="roomname" />
-                                    <input type="submit" name="changeRoomName" value="Update">
-                                </div>
+                                <br>
+                                <div class="set_levels">
 
+                                    <div class="level_temp">
+                                        <h4>> Set Temperature level</h4>
+                                        <div class="slidecontainer">
+                                            <input type="range" min="1" max="100" value="<%= preferences.lowTemp %>" class="slider" id="myRange">
+                                            <p>Lowest Level: <span id="demo"></span></p>
+                                        </div>
+
+                                        <div class="slidecontainer">
+                                            <input type="range" min="1" max="100" value="<%= preferences.highTemp %>" class="slider" id="myRange2">
+                                            <p>Highest Level: <span id="demo2"></span></p>
+                                        </div>
+
+                                    </div>
+
+                                    <br>
+                                    <div class="level_roomname">
+                                        <label for="roomname">Room Name: </label> &nbsp;
+                                        <input type="text" value="<%= preferences.roomName %>" name="roomname" />
+                                    </div>
+
+                                    <br>
+                                    <input type="submit" name="update_params" value="Update">
+                                </div>
                             </div>
-                        </div>
+                        </form>
                     </div>
                 </div>
             </div>

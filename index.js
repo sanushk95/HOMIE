@@ -1,7 +1,6 @@
 let firebaseUtil = require("./firebaseUtil");
 let firebaseDbAdapter = require('./utils/firebaseDbAdapter');
 let emulator = require('./utils/emulator');
-let twillioApi = require('./utils/twillio-api');
 
 let express = require('express');
 let app = express();
@@ -11,13 +10,53 @@ let createError = require('http-errors');
 let path = require('path');
 let cookieParser = require('cookie-parser');
 let logger = require('morgan');
+let bodyParser = require('body-parser');
+
+//Mongoose + Models
+var mongoose = require('mongoose');
+var Notification = require("./models/Notification");
+var Preferences = require("./models/Preferences");
 
 var admin = require("firebase-admin");
+
+// Download the helper library from https://www.twilio.com/docs/node/install
+// Your Account Sid and Auth Token from twilio.com/console
+// DANGER! This is insecure. See http://twil.io/secure
+const accountSid = 'ACa6fda777a50942d69faaa5f36528630d';
+const authToken = 'be6f6f239bc9df2e7d4b4690e51cdcb5';
+const client = require('twilio')(accountSid, authToken);
+
+//Param Processing
+app.use(bodyParser.json()); // support json encoded bodies
+app.use(bodyParser.urlencoded({ extended: true }));
 
 //Importing routes for news.
 let newsRoutes = require("./routes/get_news");
 let indexRoutes = require("./routes/index");
 
+// view engine setup
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'ejs');
+
+mongoose.connect('mongodb+srv://sanu:saniya1995@cluster0-5jk7j.mongodb.net/homie_db?retryWrites=true&w=majority',{useNewUrlParser: true},function(err) {
+	if(err) {
+		console.log('error connecting', err);
+	}else{
+		console.log('connected!');
+	}
+});
+
+
+let isSent = false;
+function sendsms(message) {
+  client.messages
+  .create({
+     body: message,
+     from: '+13069947863',
+     to: '+15196366439'
+   })
+  .then(message => console.log(message.sid));
+}
 
 //var serviceAccount = require("./firebase-key.json");
 let serviceAccount = firebaseUtil.getServiceAccount(); //Using encode object instead
@@ -32,21 +71,13 @@ try {
 
   //Note: Writes to firebase cloud storage is disable in development
   //      to conserve usage
-  firebaseDbAdapter.enableWrites();
+  firebaseDbAdapter.disableWrites();
 
   //firebaseDbAdapter.read(db, 'light', callback);
 } catch (e) {
   console.log(e);
 }
 
-//Temporarily disable SMS service in development mode
-twillioApi.ApiAdaptor.enable();
-
-
-
-// view engine setup
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'ejs');
 
 app.use(logger('dev'));
 app.use(express.json());
@@ -63,6 +94,9 @@ app.use(function (req, res, next) {
 //Configuring routes to the server.
 app.use('/', indexRoutes);
 app.use('/news', newsRoutes);
+
+//Init User Preferences.
+initPreferences();
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
@@ -113,14 +147,18 @@ arduino.on("ready", function () {
       io.sockets.emit('temp', this.thermometer.celsius)
       firebaseDbAdapter.write('temperature', this.thermometer.celsius);
 
-      //if (!isSent) {
-      if (this.thermometer.celsius < 15) {
-        twillioApi.ApiAdaptor.sendsms("The Temperature Level has dropped, please adjust accordingly. Thank you!!!");
+      if(!isSent){
+        if(this.thermometer.celsius<15) {
+          sendsms("The Temperature Level has dropped, please adjust accordingly. Thank you!!!");
+          createNotification("The Temperature Level has dropped, please adjust accordingly. Thank you!!!");
+          isSent=true;
+        }
+        else if(this.thermometer.celsius>28) {
+          sendsms("The Temperature Level has increased, please adjust accordingly. Thank you!!!");
+          createNotification("The Temperature Level has increased, please adjust accordingly. Thank you!!!");
+          isSent=true;
+        }
       }
-      else if (this.thermometer.celsius > 28) {
-        twillioApi.ApiAdaptor.sendsms("The Temperature Level has increased, please adjust accordingly. Thank you!!!");
-      }
-      //}
     }, 2000);
     setInterval(() => {
       io.sockets.emit('humidity', this.hygrometer.relativeHumidity);
@@ -151,7 +189,8 @@ arduino.on("ready", function () {
     io.sockets.emit('motionElement', this.detectedMotion);
     if (this.detectedMotion) {
       firebaseDbAdapter.write('motion', 'Motion was detected');
-      twillioApi.ApiAdaptor.sendsms('A movement was detected in your home');
+      sendsms("Motion Detected! Please respond immediately if this is an unknown activity. Thank you!!!");
+      createNotification("Motion Detected! Please respond immediately if this is an unknown activity. Thank you!!!");
     }
   });
 });
@@ -162,58 +201,80 @@ arduino.on("ready", function () {
 emulator.EmulatorAdaptor.disable();
 emulator.EmulatorAdaptor.addSensor({
   name: "temperature",
-  interval: 10000,
+  interval: 3000,
   range: [10, 40],
   onchange: function (sender) {
     var value = sender.value;
     io.sockets.emit('temp', value);
     //firebaseDbAdapter.write('temperature', value);
-    if (value< 15) {
-      twillioApi.ApiAdaptor.sendsms("The Temperature Level has dropped, please adjust accordingly. Thank you!!!");
-    }
-    else if (value > 28) {
-      twillioApi.ApiAdaptor.sendsms("The Temperature Level has increased, please adjust accordingly. Thank you!!!");
-    }
-    //console.log('temperature ' + new Date().toISOString());
+    console.log( 'temperature ' + new Date().toISOString());
   }
 });
 emulator.EmulatorAdaptor.addSensor({
   name: "light",
-  interval: 10000,
+  interval: 3000,
   range: [100, 1023],
   onchange: function (sender) {
     var value = sender.value;
     io.sockets.emit('lightsensor', value);
-    firebaseDbAdapter.write('light', value);
-    //console.log('motion ' + new Date().toISOString());
+    //firebaseDbAdapter.write('light', value);
+    console.log('motion ' + new Date().toISOString());
   }
 });
 
 emulator.EmulatorAdaptor.addSensor({
   name: "humidity",
-  interval: 10000,
+  interval: 3000,
   range: [10, 40],
   onchange: function (sender) {
     var value = sender.value;
     io.sockets.emit('humidity', value);
-    firebaseDbAdapter.write('humidity', value);
-    //console.log('temperature ' + new Date().toISOString());
+    //firebaseDbAdapter.write('humidity', value);
+    console.log('temperature ' + new Date().toISOString());
   }
 });
 
 emulator.EmulatorAdaptor.addSensor({
   name: "motion",
-  interval: 10000,
+  interval: 2000,
   range: [0, 1],
   onchange: function (sender) {
     var value = !!sender.value;
     io.sockets.emit('motionElement', value);
     if (value) {
-      firebaseDbAdapter.write('motion', 'Motion was detected');
-      twillioApi.ApiAdaptor.sendsms('A movement was detected in your home');
+      //firebaseDbAdapter.write('motion', 'Motion was detected');
     }
-    //console.log('motion ' + new Date().toISOString());
+    console.log('motion ' + new Date().toISOString());
   }
 });
 
 
+function createNotification(message) {
+  let notif = new Notification({message: message, timestamp: Date.now()});
+
+  notif.save((err, res) => {
+      if(err) {
+          throw err;
+          return;
+      }
+  });
+}
+
+function initPreferences() {
+  let pref = new Preferences({
+      roomName: "Main Room",
+      sendMotionNotification: false,
+      sendTempNotification: false,
+      sendWeatherNotification: false,
+      lowTemp: 15,
+      highTemp: 30
+  });
+
+  pref.save((err, pref) => {
+      if(err) {
+          throw err;
+          return;
+      }
+      console.log("[*] Initialized Default Preferences.");
+  });
+}
