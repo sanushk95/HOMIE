@@ -16,7 +16,7 @@
     "cookie-parser": "^1.4.5",
     "debug": "^4.1.1",
     "ejs": "^3.0.2",
-    "express": "^4.17.1",
+    "express": "^4.17.3",
     "file-system": "^2.2.2",
     "firebase-admin": "^8.10.0",
     "http-errors": "^1.7.3",
